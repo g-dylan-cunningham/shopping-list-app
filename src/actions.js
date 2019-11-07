@@ -9,4 +9,11 @@ const addItem = (data) => {
     }
 }
 
-export { addItem };
+const deleteItem = (id) => {
+    return {
+        type: 'DELETE_ITEM',
+        id
+    }
+}
+
+export { addItem, deleteItem };

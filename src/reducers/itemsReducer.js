@@ -17,7 +17,9 @@ const items = (state = initState, action) => {
             return state.concat(item);
 
         case "DELETE_ITEM":
-            return state;
+            return state.filter(item => {
+                return item.id !== action.id;
+            });
             
         default:
             return state;
