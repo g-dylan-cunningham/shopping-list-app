@@ -1,12 +1,13 @@
 
 let initialId = 0;
-const items = (state = [
+const initState = [
     {
         id: 'asdfds',
         text: 'carrots',
         repeating: false
     }
-], action) => {
+]
+const items = (state = initState, action) => {
     switch(action.type) {
         case "ADD_ITEM":
             return state;

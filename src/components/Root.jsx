@@ -1,12 +1,16 @@
 import React from 'react';
 import App from '../App';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-const Root = () => {
+const Root = ({ store }) => {
     
     return (
-        <div>
-           <App />
-        </div>
+        <Provider store={store} >
+            <Router>
+                <Route path='/' component={App} />
+           </Router>
+        </Provider>
     )
 }
 
