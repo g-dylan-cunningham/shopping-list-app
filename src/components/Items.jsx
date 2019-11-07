@@ -1,12 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Items = () => {
-    
+const Item = ({item}) => {
+
     return (
         <div>
-           Items 
+            {item.text}
         </div>
     )
 }
 
-export default Items;
+const Items = ({items}) => {
+    
+    return (
+        <div>
+            {items.map(item => {
+                return <Item key={item.id} item={item} />
+            })}
+        </div>
+    )
+}
+
+const mapStateToProps = (state) => {
+
+    return {
+        items: state.items
+    }
+}
+
+export default connect(mapStateToProps, null)(Items);
