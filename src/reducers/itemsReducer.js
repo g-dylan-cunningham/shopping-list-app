@@ -1,18 +1,24 @@
-
-let initialId = 0;
 const initState = [
     {
-        id: 'asdfds',
+        id: '234asa-afasdfsd-fsdfsdf',
         text: 'carrots',
         repeating: false
     }
 ]
 const items = (state = initState, action) => {
+
     switch(action.type) {
         case "ADD_ITEM":
-            return state;
+            const item = {
+                id: action.id,
+                text: action.text,
+                repeating: action.repeating
+            }
+            return state.concat(item);
+
         case "DELETE_ITEM":
             return state;
+            
         default:
             return state;
     }

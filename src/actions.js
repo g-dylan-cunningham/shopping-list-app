@@ -1,11 +1,11 @@
-
+import { v4 } from 'node-uuid';
 
 const addItem = (data) => {
-    console.log("action called")
     return {
         type: 'ADD_ITEM',
-        text: 'test working',
-        repeating: true
+        id: v4(),
+        text: data.text,
+        repeating: data.repeating
     }
 }
 
