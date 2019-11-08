@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const Root = ({ store }) => {
-    
     return (
         <Provider store={store} >
             <Router>

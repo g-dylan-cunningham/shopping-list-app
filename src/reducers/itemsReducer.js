@@ -12,7 +12,8 @@ const items = (state = initState, action) => {
             const item = {
                 id: action.id,
                 text: action.text,
-                repeating: action.repeating
+                repeating: action.repeating,
+                createdAt: action.createdAt
             }
             return state.concat(item);
 
@@ -38,7 +39,6 @@ export const getVisibleItems = (state, filter) => {
             });
         case 'one-time':
             return state.filter(item => {
-                // console.log("asdf'", item.repeating !== true)
                 return item.repeating !== true;
             });
         default:
