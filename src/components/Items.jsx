@@ -1,21 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions';
+import { getVisibleItems } from '../reducers';
+import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 const Item = ({item, deleteItem}) => {
 
     const baseStyle = {
         width: '50%',
         position: 'relative',
-        padding: '5px 5px'
+        padding: '5px 5px',
+        display: 'flex',
+        justifyContent: 'space-between'
     }
 
     return (
         <div
             style={item.repeating ? {backgroundColor: 'yellow', ...baseStyle} : baseStyle}
         >
-            <span>{item.text}</span>{" "}
-            <button style={{position: 'absolute', right: '20px'}} onClick={() => deleteItem(item.id)}>delete</button>
+            <div>{item.text}</div>
+            <div>{moment(item.createdAt).fromNow()}</div>{" "}
+            <div><button onClick={() => deleteItem(item.id)}>delete</button></div>
         </div>
     )
 }
@@ -32,10 +38,10 @@ const Items = ({items, deleteItem}) => {
     )
 }
 
-const mapStateToProps = (state) => {
-
+const mapStateToProps = (state, ownProps) => {
+    const {match: {params: {filter}}} = ownProps;
     return {
-        items: state.items
+        items: getVisibleItems(state.items, filter)
     }
 }
 
@@ -48,4 +54,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Items);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Items));
