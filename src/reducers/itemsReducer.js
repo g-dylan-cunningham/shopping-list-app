@@ -27,3 +27,21 @@ const items = (state = initState, action) => {
 }
 
 export default items;
+
+export const getVisibleItems = (state, filter) => {
+    switch(filter) {
+        case 'all':
+            return state;
+        case 'repeating':
+            return state.filter(item => {
+                return item.repeating === true;
+            });
+        case 'one-time':
+            return state.filter(item => {
+                // console.log("asdf'", item.repeating !== true)
+                return item.repeating !== true;
+            });
+        default:
+            return state;
+    }
+}

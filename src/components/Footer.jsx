@@ -1,29 +1,41 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 
-const FilterLink = ({filter, children}) => (
-    <span>{" "}
-        <NavLink
-            to={filter}
-            activeStyle={{
-                textDecoration: 'none',
-                color: 'black'
-            }}
-        >
-            {children}
-        </NavLink>
-    </span>
-)
+const FilterLink = ({filter, sorting, children }) => {
+    return (
+        <span>{" "}
+            <NavLink
+                to={location => ({ ...location, pathname: `/${filter}/${sorting}` })}
+                activeStyle={{
+                    textDecoration: 'none',
+                    color: 'black'
+                }}
+                replace={true}
+            >   
+                {children}
+            </NavLink>
+        </span>
+    )
+}
 
-const Footer = () => {
+
+const Footer = ({match, location}) => {
+    const { params: { filter, sorting }} = match;
     return (
         <div>
-           <FilterLink filter='all' >All</FilterLink>
-           <FilterLink filter='repeating'>Repeating</FilterLink>
-           <FilterLink filter='one-time'>One-Time</FilterLink>
+            <div>
+                <FilterLink filter='all' sorting={sorting}>All</FilterLink>
+                <FilterLink filter='repeating' sorting={sorting}>Repeating</FilterLink>
+                <FilterLink filter='one-time' sorting={sorting}>One-Time</FilterLink>
+            </div>
+            <div>
+                <FilterLink filter={filter} sorting='chrono'>Chronological</FilterLink>
+                <FilterLink filter={filter} sorting='sorted'>Sorted</FilterLink>
+            </div>
         </div>
     )
 }
 
-export default Footer;
+
+export default withRouter(Footer);

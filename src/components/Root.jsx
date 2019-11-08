@@ -8,7 +8,7 @@ const Root = ({ store }) => {
     return (
         <Provider store={store} >
             <Router>
-                <Route path='/' component={App} />
+                <Route path='/:filter/:sorting?' component={App} />
            </Router>
         </Provider>
     )
