@@ -7,21 +7,23 @@ import moment from 'moment';
 
 const Item = ({item, deleteItem}) => {
 
-    const baseStyle = {
-        width: '50%',
+    const itemStyle = {
+        backgroundColor: item.repeating ? 'yellow' : '',
         position: 'relative',
         padding: '5px 5px',
         display: 'flex',
         justifyContent: 'space-between'
     }
 
+    const fieldStyle = (percent) => ({
+        width: `${percent}%`
+    })
+
     return (
-        <div
-            style={item.repeating ? {backgroundColor: 'yellow', ...baseStyle} : baseStyle}
-        >
-            <div>{item.text}</div>
-            <div>{moment(item.createdAt).fromNow()}</div>{" "}
-            <div><button onClick={() => deleteItem(item.id)}>delete</button></div>
+        <div style={itemStyle}>
+            <div style={fieldStyle(40)}>{item.text}</div>
+            <div style={fieldStyle(30)}>{moment(item.createdAt).fromNow()}</div>{" "}
+            <div style={fieldStyle(30)}><button onClick={() => deleteItem(item.id)}>delete</button></div>
         </div>
     )
 }
