@@ -7,7 +7,6 @@ const rootReducer = combineReducers({
 })
 export default rootReducer;
 
-export const getVisibleItems = (state, filter) => {
-
-    return fromItems.getVisibleItems(state, filter);
+export const getVisibleItems = (state, filter, sorting) => {
+    return fromItems.getVisibleItems(state, filter, sorting);
 }

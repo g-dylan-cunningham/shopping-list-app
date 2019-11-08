@@ -29,19 +29,51 @@ const items = (state = initState, action) => {
 
 export default items;
 
-export const getVisibleItems = (state, filter) => {
+export const getVisibleItems = (state, filter, sorting) => {
     switch(filter) {
         case 'all':
-            return state;
+            return sortSelector(state, sorting);
         case 'repeating':
-            return state.filter(item => {
+            const repeatingItems = state.filter(item => {
                 return item.repeating === true;
             });
+            return sortSelector(repeatingItems, sorting);
+            return state;
         case 'one-time':
-            return state.filter(item => {
+            const oneTimeItems = state.filter(item => {
                 return item.repeating !== true;
             });
+            return sortSelector(oneTimeItems, sorting);
+            return state;
         default:
             return state;
+    }
+}
+
+const sortSelector = (state, sorting) => {
+    if(sorting === 'chrono') {
+        const chronoSortedItems = state.slice().sort((a,b) => {
+            if(a.createdAt > b.createAt) {
+                return 1;
+            } else if (a.createAt < b.createAt) {
+                return -1;
+            } else {
+                return 0;
+            }
+        })
+        return chronoSortedItems.reverse();
+    } else if (sorting === 'alpha') {
+        const alPhaSortedItems = state.slice().sort((a,b) => {
+            if(a.text < b.text) {
+                return -1;
+            } else if (a.text > b.text) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+        return alPhaSortedItems;
+    } else {
+        return state;
     }
 }

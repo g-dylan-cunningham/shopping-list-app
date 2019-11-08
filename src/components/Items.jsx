@@ -41,9 +41,9 @@ const Items = ({items, deleteItem}) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const {match: {params: {filter}}} = ownProps;
+    const {match: {params: {filter, sorting}}} = ownProps;
     return {
-        items: getVisibleItems(state.items, filter)
+        items: getVisibleItems(state.items, filter, sorting)
     }
 }
 

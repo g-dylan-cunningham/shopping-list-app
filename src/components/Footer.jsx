@@ -20,7 +20,7 @@ const FilterLink = ({filter, sorting, children }) => {
 }
 
 
-const Footer = ({match, location}) => {
+const Footer = ({ match }) => {
     const { params: { filter, sorting }} = match;
     return (
         <div>
@@ -31,7 +31,7 @@ const Footer = ({match, location}) => {
             </div>
             <div>
                 <FilterLink filter={filter} sorting='chrono'>Chronological</FilterLink>
-                <FilterLink filter={filter} sorting='sorted'>Sorted</FilterLink>
+                <FilterLink filter={filter} sorting='alpha'>Alphabetical</FilterLink>
             </div>
         </div>
     )
