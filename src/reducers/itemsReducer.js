@@ -22,7 +22,16 @@ const items = (state = initState, action) => {
             return state.filter(item => {
                 return item.id !== action.id;
             });
-            
+        case "TOGGLE_ITEM_IMPORTANT":
+            const newState = state.filter(item => {
+                if(item.id !== action.id) {
+                    return item;
+                } else {
+                    item.important = !item.important;
+                    return item;
+                }
+            })
+            return newState;
         default:
             return state;
     }

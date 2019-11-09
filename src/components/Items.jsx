@@ -5,7 +5,7 @@ import { getVisibleItems } from '../reducers';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 
-const Item = ({item, deleteItem}) => {
+const Item = ({item, deleteItem, toggleItemImportant}) => {
 
     const itemStyle = {
         backgroundColor: item.repeating ? 'yellow' : '',
@@ -19,24 +19,24 @@ const Item = ({item, deleteItem}) => {
     const fieldStyle = (percent) => ({
         width: `${percent}%`
     })
-    console.log("item", item.important)
 
     return (
         <div style={itemStyle}>
             <div style={fieldStyle(35)}>{item.text}</div>
             <div style={fieldStyle(20)}>{moment(item.createdAt).fromNow()}</div>{" "}
             <div style={fieldStyle(20)}><button onClick={() => deleteItem(item.id)}>delete</button></div>
+            <div style={fieldStyle(20)}><button onClick={() => toggleItemImportant(item.id)}>important</button></div>
         </div>
     )
 }
 
-const Items = ({items, deleteItem}) => {
+const Items = ({items, deleteItem, toggleItemImportant}) => {
     
     return (
         <div>
             <h2>Your List:</h2>
             {items.map(item => {
-                return <Item key={item.id} item={item} deleteItem={deleteItem}/>
+                return <Item key={item.id} item={item} deleteItem={deleteItem} toggleItemImportant={toggleItemImportant}/>
             })}
         </div>
     )
@@ -54,6 +54,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteItem: (id) => {
             dispatch(actionCreators.deleteItem(id))
+        },
+        toggleItemImportant: (id) => {
+            dispatch(actionCreators.toggleItemImportant(id))
         }
     }
 }

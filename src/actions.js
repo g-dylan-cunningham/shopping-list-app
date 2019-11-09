@@ -18,4 +18,11 @@ const deleteItem = (id) => {
     }
 }
 
-export { addItem, deleteItem };
+const toggleItemImportant = (id) => {
+    return {
+        type: 'TOGGLE_ITEM_IMPORTANT',
+        id
+    }
+}
+
+export { addItem, deleteItem, toggleItemImportant };
