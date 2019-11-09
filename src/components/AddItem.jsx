@@ -5,7 +5,8 @@ import * as actionCreator from '../actions'
 const AddItem = ({ addItem }) => {
 
     let input;
-    let checkbox;
+    let repeatingCheck;
+    let importantCheck;
     return (
         <div>
            <h1>Add an Item</h1>
@@ -14,10 +15,11 @@ const AddItem = ({ addItem }) => {
                     e.preventDefault();
                     addItem({
                         text: input.value, 
-                        repeating: checkbox.checked
+                        repeating: repeatingCheck.checked,
+                        important: importantCheck.checked
                     });
                     input.value = '';
-                    checkbox.checked = false;
+                    repeatingCheck.checked = false;
                 }}
            >
                <div>
@@ -25,8 +27,12 @@ const AddItem = ({ addItem }) => {
                     <input id='item-input' ref={node => input = node} type='text'/>
                 </div>
                 <div>
-                    <label htmlFor='is-repeating-checkbox'>Repeats?</label>
-                    <input id='is-repeating-checkbox' ref={node => checkbox = node} type='checkbox' />
+                    <label htmlFor='is-repeating'>Repeats?</label>
+                    <input id='is-repeating' ref={node => repeatingCheck = node} type='checkbox' />
+                </div>
+                <div>
+                    <label htmlFor='is-importaint'>Important?</label>
+                    <input id='is-importaint' ref={node => importantCheck = node} type='checkbox' />
                 </div>
                 <div>
                     <button type='submit' >Add Item</button>

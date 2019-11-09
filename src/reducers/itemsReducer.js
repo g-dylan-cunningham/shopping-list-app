@@ -13,6 +13,7 @@ const items = (state = initState, action) => {
                 id: action.id,
                 text: action.text,
                 repeating: action.repeating,
+                important: action.important,
                 createdAt: action.createdAt
             }
             return state.concat(item);

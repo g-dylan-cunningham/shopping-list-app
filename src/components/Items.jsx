@@ -12,18 +12,20 @@ const Item = ({item, deleteItem}) => {
         position: 'relative',
         padding: '5px 5px',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        fontWeight: item.important ? '800' : '400'
     }
 
     const fieldStyle = (percent) => ({
         width: `${percent}%`
     })
+    console.log("item", item.important)
 
     return (
         <div style={itemStyle}>
-            <div style={fieldStyle(40)}>{item.text}</div>
-            <div style={fieldStyle(30)}>{moment(item.createdAt).fromNow()}</div>{" "}
-            <div style={fieldStyle(30)}><button onClick={() => deleteItem(item.id)}>delete</button></div>
+            <div style={fieldStyle(35)}>{item.text}</div>
+            <div style={fieldStyle(20)}>{moment(item.createdAt).fromNow()}</div>{" "}
+            <div style={fieldStyle(20)}><button onClick={() => deleteItem(item.id)}>delete</button></div>
         </div>
     )
 }

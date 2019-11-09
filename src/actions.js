@@ -6,7 +6,8 @@ const addItem = (data) => {
         id: v4(),
         createdAt: moment(),
         text: data.text,
-        repeating: data.repeating
+        repeating: data.repeating,
+        important: data.important
     }
 }
 
