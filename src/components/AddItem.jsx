@@ -20,6 +20,7 @@ const AddItem = ({ addItem }) => {
                     });
                     input.value = '';
                     repeatingCheck.checked = false;
+                    importantCheck.checked = false;
                 }}
            >
                <div>

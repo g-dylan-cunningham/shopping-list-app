@@ -39,28 +39,30 @@ const items = (state = initState, action) => {
 
 export default items;
 
-export const getVisibleItems = (state, filter, sorting) => {
+export const getVisibleItems = (state, filter, sorting, important) => {
     switch(filter) {
         case 'all':
-            return sortSelector(state, sorting);
+            return filterImportant(sortCreatedAtSelector(state, sorting), important);
+            
         case 'repeating':
             const repeatingItems = state.filter(item => {
                 return item.repeating === true;
             });
-            return sortSelector(repeatingItems, sorting);
-            return state;
+            return filterImportant(sortCreatedAtSelector(repeatingItems, sorting), important);
+
         case 'one-time':
             const oneTimeItems = state.filter(item => {
                 return item.repeating !== true;
             });
-            return sortSelector(oneTimeItems, sorting);
-            return state;
+            return filterImportant(sortCreatedAtSelector(oneTimeItems, sorting), important);
+
         default:
             return state;
     }
 }
 
-const sortSelector = (state, sorting) => {
+const sortCreatedAtSelector = (state, sorting) => {
+    
     if(sorting === 'chrono') {
         const chronoSortedItems = state.slice().sort((a,b) => {
             if(a.createdAt > b.createAt) {
@@ -85,5 +87,18 @@ const sortSelector = (state, sorting) => {
         return alPhaSortedItems;
     } else {
         return state;
+    }
+}
+
+const filterImportant = (items, important) => {
+    switch(important) {
+        case 'all':
+            return items;
+        case 'important':
+            return items.filter(item => item.important); 
+        case 'unimportant':
+            return items.filter(item => !item.important)
+        default:
+            return items;
     }
 }
